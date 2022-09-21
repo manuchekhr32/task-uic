@@ -15,18 +15,30 @@
               id="username" 
               v-model="username" 
               class="form-field__input" 
-              type="text" 
+              type="text"
+              required 
               placeholder="adm8904" 
             />
           </div>
 
-          <div class="form-field mt-[22px]">
+          <div class="form-field mt-[22px] mb-[22px]">
             <label class="form-field__label" for="password">Parol</label>
             <input 
               id="password" 
               v-model="password" 
               class="form-field__input" 
-              type="password" 
+              type="password"
+              required 
+            />
+          </div>
+
+          <div class="w-full">
+            <VueRecaptcha
+              class="!scale-[calc(320_/_304)] !origin-[0_0]"
+              sitekey="6LdXqRgiAAAAAF9M1flol5Blu0LhIGG4S4W5Tx6z"  
+              :load-recaptcha-script="true"
+              @verify="recapSuccess"
+              @error="recapError"
             />
           </div>
 
@@ -50,6 +62,7 @@
 <script setup lang="ts">
 import { inject, onMounted, reactive, ref } from "@vue/runtime-core";
 import { AxiosError, AxiosInstance } from "axios";
+import { VueRecaptcha } from 'vue-recaptcha';
 const $axios: AxiosInstance = inject('$axios')!;
 
 const username = ref('username');
@@ -57,6 +70,7 @@ const password = ref('password');
 const loggingIn = ref(false);
 
 const login = async () => {
+  if (!recapVerified.value) {return alert("Recaptcha is not verified!")};
   loggingIn.value = true;
   try {
     const res = await $axios.post('/auth/login', { username, password });
@@ -65,6 +79,17 @@ const login = async () => {
     console.log(error);
   }
   loggingIn.value = false;
+}
+
+const recapVerified = ref(false);
+const recapSuccess = (response: string) => {
+  recapVerified.value = true;
+  console.log(response);
+}
+
+const recapError = () => {
+  recapVerified.value = false;
+  console.log("error");
 }
 
 </script>
