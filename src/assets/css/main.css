@@ -17,3 +17,7 @@
 *:disabled {
   @apply opacity-60 pointer-events-none cursor-default;
 }
+
+input, button {
+  @apply font-rubik outline-none;
+}

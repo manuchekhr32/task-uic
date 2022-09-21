@@ -5,8 +5,8 @@ export default [
     component: () => import('@/views/Login.vue'),
   },
   {
-    path: '/dashboard',
-    name: 'dashboard',
-    component: () => import('@/views/Dashboard.vue'),
+    path: '/admin/sponsors',
+    name: 'admin-sponsors',
+    component: () => import('@/views/admin/Sponsors.vue'),
   },
 ]
