@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="bg-gray">
     <router-view />
   </div>
 </template>
@@ -8,7 +8,7 @@
 import { provide } from "@vue/runtime-core";
 import axios from "./plugins/axios";
 
-provide('$axios', { ...axios })
+provide('$axios', axios)
 </script>
 
 <style scoped>

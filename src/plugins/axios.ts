@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const instance = axios.create({
-  baseURL: import.meta.env.BASE_URL,
+  baseURL: 'https://club.metsenat.uz/api/v1',
   withCredentials: true,
 })
 

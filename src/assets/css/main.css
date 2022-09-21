@@ -1,3 +1,19 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.middle {
+  @apply flex justify-center items-center;
+}
+
+.form-field .form-field__label {
+  @apply uppercase text-sm font-medium tracking-wider;
+}
+
+.form-field .form-field__input {
+  @apply w-full mt-2 text-sm px-4 py-3 border border-light-purple rounded-md bg-light-purple/20 outline-none transition-colors duration-200 focus:border-primary;
+}
+
+*:disabled {
+  @apply opacity-60 pointer-events-none cursor-default;
+}
