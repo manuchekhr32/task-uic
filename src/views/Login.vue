@@ -75,8 +75,8 @@ const $axios: AxiosInstance = inject('$axios')!;
 const router = useRouter();
 const store = useMainStore();
 
-const username = ref('metsenatadmin');
-const password = ref('uF9aH1vZ3bV2kN2y');
+const username = ref('');
+const password = ref('');
 const loggingIn = ref(false);
 const unauthorized = ref(false);
 

@@ -67,7 +67,7 @@ const { dateFormat, uzs, statusColor } = useFiltersMixin();
 const $axios: AxiosInstance = inject('$axios')!;
 const route = useRoute();
 
-const rows = ref([]);
+const rows = ref([] as any[]);
 const loading = ref(false);
 const total = ref(0);
 
