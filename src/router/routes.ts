@@ -1,32 +1,37 @@
 import auth from '../middleware/auth';
+import Login from '@/views/Login.vue'
+import Admin from '@/views/admin/index.vue'
+import Sponsors from '@/views/admin/_sponsors.vue'
+import Dashboard from '@/views/admin/_dashboard.vue'
+import Students from '@/views/admin/_students.vue'
 
 export default [
   {
     path: '/auth/login',
     name: 'login',
     beforeEnter: [auth],
-    component: () => import('@/views/Login.vue'),
+    component: Login,
   },
   {
     path: '/admin',
     name: 'admin',
     beforeEnter: [auth],
-    component: () => import('@/views/admin/index.vue'),
+    component: Admin,
     children: [
       {
         path: 'sponsors',
         name: 'admin-sponsors',
-        component: () => import('@/views/admin/_sponsors.vue'),
+        component: Sponsors,
       },
       {
         path: 'dashboard',
         name: 'admin-dashboard',
-        component: () => import('@/views/admin/_dashboard.vue'),
+        component: Dashboard,
       },
       {
         path: 'students',
         name: 'admin-students',
-        component: () => import('@/views/admin/_students.vue'),
+        component: Students,
       },
     ]
   },
