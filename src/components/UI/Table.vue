@@ -1,6 +1,5 @@
 <template>
-  <div class="table overflow-x-auto relative font-rubik">
-    <table class="w-full border-separate border-spacing-y-3">
+    <table class="w-full table font-rubik table-auto border-separate border-spacing-y-3">
       <thead>
         <tr class="text-center text-silver text-xs uppercase tracking-widest font-medium">
           <slot name="thead"></slot>
@@ -10,7 +9,6 @@
         <slot name="tbody"></slot>
       </tbody>
     </table>
-  </div>
 </template>
 
 <style>
@@ -32,5 +30,9 @@
 
   .table thead td {
     @apply px-2;
+  }
+
+  .table td:not(:first-child):not(:last-child):not([data-primary]) {
+    @apply px-2 whitespace-nowrap;
   }
 </style>

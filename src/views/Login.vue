@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen middle p-2">
+  <div class="min-h-screen middle px-2 py-4">
     <div class="w-full max-w-sm">
       <div class="middle w-full mb-12">
         <img src="@/assets/logo/logo__club.svg" alt="404">
@@ -28,6 +28,7 @@
               v-model="password" 
               class="form-field__input" 
               type="password"
+              placeholder="********"
               required 
             />
           </div>
@@ -65,12 +66,12 @@ import { AxiosError, AxiosInstance } from "axios";
 import { VueRecaptcha } from 'vue-recaptcha';
 const $axios: AxiosInstance = inject('$axios')!;
 
-const username = ref('username');
-const password = ref('password');
+const username = ref('');
+const password = ref('');
 const loggingIn = ref(false);
 
 const login = async () => {
-  if (!recapVerified.value) {return alert("Recaptcha is not verified!")};
+  // if (!recapVerified.value) {return alert("Recaptcha is not verified!")};
   loggingIn.value = true;
   try {
     const res = await $axios.post('/auth/login', { username, password });
