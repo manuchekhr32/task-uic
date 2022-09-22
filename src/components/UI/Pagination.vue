@@ -21,16 +21,24 @@
         <i class="fa fa-chevron-left text-sm text-light-silver" aria-hidden="true"></i>
       </button>
       <button 
-        v-for="p in pages" :key="p" 
-        @click="setPage(p)"
-        :class="p === page ? 'active' : ''"
+        v-for="p in pages-2 > page ? 2 : 4" :key="p" 
+        @click="setPage(page + p - 1)"
+        :class="page + p - 1 === page ? 'active' : ''"
         class="ui-input pagination__item middle"
       >
-        {{ p }}
+        {{ page + p - 1 }}
       </button>
-      <!-- <div class="ui-input pagination__item middle">
+      <div v-if="pages-2 > page" class="ui-input pagination__item middle">
         ...
-      </div> -->
+      </div>
+      <button 
+        v-if="pages-2 > page"
+        @click="setPage(pages)"
+        :class="pages === page ? 'active' : ''"
+        class="ui-input pagination__item middle"
+      >
+        {{ pages }}
+      </button>
       <button 
         @click="setPage('next')"
         :disabled="page === pages"
