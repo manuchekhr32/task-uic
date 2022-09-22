@@ -44,7 +44,7 @@
 
           <button
             :disabled="loggingIn"
-            class="bg-primary rounded-md mt-[22px] w-full py-[14px] text-white text-[15px] font-medium"
+            class="bg-primary rounded-md mt-[22px] w-full py-[14px] text-white text-15p font-medium"
           >
             <span v-if="loggingIn">
               <i class="fad fa-spinner-third animate-spin"></i>

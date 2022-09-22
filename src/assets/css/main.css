@@ -14,10 +14,14 @@
   @apply w-full mt-2 text-sm px-4 py-3 border border-light-purple rounded-md bg-light-purple/20 outline-none transition-colors duration-200 focus:border-primary;
 }
 
-*:disabled {
+*:disabled, .disabled {
   @apply opacity-60 pointer-events-none cursor-default;
 }
 
-input, button {
+input, button, select, textarea {
   @apply font-rubik outline-none;
+}
+
+.ui-input {
+  @apply bg-white p-1 rounded-2sm border border-gray-blue cursor-pointer;
 }
