@@ -9,7 +9,11 @@
         <form @submit.prevent="login">
           <h1 class="font-bold text-2xl text-dark-blue">Kirish</h1>
 
-          <div class="form-field mt-11">
+          <p v-if="unauthorized" class="text-red-500 mt-5 font-medium font-rubik">
+            Tizimga kirishda xatolik!
+          </p>
+
+          <div :class="unauthorized ? 'mt-6' : 'mt-11'" class="form-field">
             <label class="form-field__label" for="username">Login</label>
             <input 
               id="username" 
@@ -47,10 +51,10 @@
             :disabled="loggingIn"
             class="bg-primary rounded-md mt-[22px] w-full py-[14px] text-white text-15p font-medium"
           >
-            <span v-if="loggingIn">
+            <span v-show="loggingIn">
               <i class="fad fa-spinner-third animate-spin"></i>
             </span>
-            <span v-else>
+            <span v-show="!loggingIn">
               Kirish
             </span>
           </button>
@@ -64,22 +68,34 @@
 import { inject, onMounted, reactive, ref } from "@vue/runtime-core";
 import { AxiosError, AxiosInstance } from "axios";
 import { VueRecaptcha } from 'vue-recaptcha';
+import { useRouter } from "vue-router";
 import { useMainStore } from "../store";
+
 const $axios: AxiosInstance = inject('$axios')!;
+const router = useRouter();
 const store = useMainStore();
 
-const username = ref('');
-const password = ref('');
+const username = ref('metsenatadmin');
+const password = ref('uF9aH1vZ3bV2kN2y');
 const loggingIn = ref(false);
+const unauthorized = ref(false);
 
 const login = async () => {
   // if (!recapVerified.value) {return alert("Recaptcha is not verified!")};
   loggingIn.value = true;
+  unauthorized.value = false;
   try {
-    console.log(store.getTokens);
-    const res = await $axios.post('/auth/login', { username, password });
-    console.log(res);
+    const { data } = await $axios.post('/auth/login/', { 
+      username: username.value, 
+      password: password.value 
+    });
+    store.setTokens({
+      access_token: data.access,
+      refresh_token: data.refresh,
+    })
+    router.push({ name: 'admin-sponsors' })
   } catch (error) {
+    unauthorized.value = true;
     console.log(error);
   }
   loggingIn.value = false;

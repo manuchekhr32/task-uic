@@ -1,12 +1,16 @@
+import auth from '../middleware/auth';
+
 export default [
   {
     path: '/auth/login',
     name: 'login',
+    beforeEnter: [auth],
     component: () => import('@/views/Login.vue'),
   },
   {
     path: '/admin',
     name: 'admin',
+    beforeEnter: [auth],
     component: () => import('@/views/admin/index.vue'),
     children: [
       {

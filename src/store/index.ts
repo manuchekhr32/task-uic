@@ -12,12 +12,25 @@ export const useMainStore = defineStore('main', () => {
     }
   })
 
+  const isAuthenticated = computed(() => {
+    return !(!access_token.value && !refresh_token.value);
+  })
+
   const setTokens = (tokens: AuthTokens) => {
+    localStorage.setItem('access_token', tokens.access_token);
+    localStorage.setItem('refresh_token', tokens.refresh_token);
     access_token.value = tokens.access_token;
     refresh_token.value = tokens.refresh_token;
   }
 
+  const logout = () => {
+    localStorage.removeItem('access_token');
+    localStorage.removeItem('refresh_token');
+    access_token.value = null;
+    refresh_token.value = null;
+  }
+
   return {
-    getTokens, setTokens,
+    getTokens, setTokens, isAuthenticated, logout
   }
 })
