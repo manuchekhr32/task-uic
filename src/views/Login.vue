@@ -64,7 +64,9 @@
 import { inject, onMounted, reactive, ref } from "@vue/runtime-core";
 import { AxiosError, AxiosInstance } from "axios";
 import { VueRecaptcha } from 'vue-recaptcha';
+import { useMainStore } from "../store";
 const $axios: AxiosInstance = inject('$axios')!;
+const store = useMainStore();
 
 const username = ref('');
 const password = ref('');
@@ -74,6 +76,7 @@ const login = async () => {
   // if (!recapVerified.value) {return alert("Recaptcha is not verified!")};
   loggingIn.value = true;
   try {
+    console.log(store.getTokens);
     const res = await $axios.post('/auth/login', { username, password });
     console.log(res);
   } catch (error) {

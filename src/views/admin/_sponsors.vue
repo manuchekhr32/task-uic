@@ -22,18 +22,18 @@
           <td class="!w-max">{{ row.phone }}</td>
           <td>
             <span class="font-medium text-slate-700">
-              {{ $filters.uzs(row.sum) }}
+              {{ uzs(row.sum) }}
               <span class="text-silver">UZS</span>
             </span>
           </td>
           <td>
             <span class="font-medium text-slate-700">
-              {{ $filters.uzs(row.spent) }}
+              {{ uzs(row.spent) }}
               <span class="text-silver">UZS</span>
             </span>
           </td>
-          <td>{{ $filters.dateFormat(row.created_at) }}</td>
-          <td :class="$filters.statusColor(row.get_status_display)" class="!text-15p">
+          <td>{{ dateFormat(row.created_at) }}</td>
+          <td :class="statusColor(row.get_status_display)" class="!text-15p">
             {{ row.get_status_display }}
           </td>
           <td>
@@ -53,6 +53,8 @@
 import Table from "@/components/UI/Table.vue";
 import Pagination from "@/components/UI/Pagination.vue";
 import { reactive } from "@vue/reactivity";
+import { useFiltersMixin } from "../../mixins/filters";
+const { dateFormat, uzs, statusColor } = useFiltersMixin();
 
 const rows = reactive([
   {
